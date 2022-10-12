@@ -44,7 +44,7 @@ class EpsonEposPrinter {
     return [];
   }
 
-  Future<dynamic> onPrint(
+  static Future<dynamic> onPrint(
       EpsonPrinterModel printer, List<Map<String, dynamic>> commands) async {
     final Map<String, dynamic> params = {
       "type": printer.type,
