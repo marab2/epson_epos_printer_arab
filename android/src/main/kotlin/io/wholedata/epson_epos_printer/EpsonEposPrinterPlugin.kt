@@ -105,7 +105,7 @@ class EpsonEposPrinterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     );
   }
 
-  fun onMethodCall(@NonNull call: MethodCall, @NonNull rawResult: Result) {
+  override fun onMethodCall(@NonNull call: MethodCall, @NonNull rawResult: Result) {
     val result = MethodResultWrapper(rawResult)
     //Thread(MethodRunner(call, result)).start()
     if (call.method == "getPlatformVersion") {
@@ -115,7 +115,7 @@ class EpsonEposPrinterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     }
   }
 
-  fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+ override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
     channel.setMethodCallHandler(null)
   }
 
@@ -124,7 +124,7 @@ class EpsonEposPrinterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private val result: Result = result
 
 
-    fun onPtrReceive(p0: Printer?, p1: Int, p2: PrinterStatusInfo?, p3: String?) {
+  override  fun onPtrReceive(p0: Printer?, p1: Int, p2: PrinterStatusInfo?, p3: String?) {
       Log.d(logTag, "${p0?.status} p2 $p2 p3 $p3")
       disconnectPrinter()
     }
@@ -163,15 +163,15 @@ class EpsonEposPrinterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private val methodResult: Result = methodResult
     private val handler: Handler = Handler(Looper.getMainLooper())
 
-    fun success(result: Any?) {
+  override  fun success(result: Any?) {
       handler.post { methodResult.success(result) }
     }
 
-    fun error(errorCode: String, errorMessage: String?, errorDetails: Any?) {
+  override  fun error(errorCode: String, errorMessage: String?, errorDetails: Any?) {
       handler.post { methodResult.error(errorCode, errorMessage, errorDetails) }
     }
 
-    fun notImplemented() {
+  override  fun notImplemented() {
       handler.post { methodResult.notImplemented() }
     }
   }

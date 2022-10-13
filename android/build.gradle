@@ -2,7 +2,7 @@ group 'io.wholedata.epson_epos_printer'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.6.10'
+    ext.kotlin_version = '1.7.20'
     repositories {
         google()
         mavenCentral()
@@ -43,4 +43,11 @@ android {
     defaultConfig {
         minSdkVersion 16
     }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation fileTree(include: '*.jar', dir: 'libs')
+    implementation 'androidx.annotation:annotation:1.5.0'
+    implementation 'com.google.code.gson:gson:2.9.1'
 }
